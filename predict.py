@@ -8,26 +8,18 @@ from data_loader import get_data
 from model_manager import ModelManager
 
 def main():
-    # Încarcă datele de testare
     _, _, test_data, _, _, label2index, index2label, test_x, test_y = get_data()
-    
-    # Încarcă modelul salvat
     model = load_model('./SavedModels/ResNet50V2_DataAug.h5')
-
-    # Creează un generator pentru datele de testare
     def preprocess_image(path):
         image = Image.open(path)
-        image = image.resize((128, 128))  # Redimensionează la dimensiunea așteptată de model
-        image = np.array(image) / 255.0  # Normalizează imaginea
+        image = image.resize((128, 128)) 
+        image = np.array(image) / 255.0
         return image
 
     test_x_display = [preprocess_image(path) for path in test_x]
     test_x_display = np.asarray(test_x_display)
-
-    # Face predicții
     test_predictions = model.predict(test_x_display)
 
-    # Afișează rezultatele
     true_predict = 0
     false_predict = 0
     fig = plt.figure(figsize=(20, 16))
@@ -50,7 +42,6 @@ def main():
     print('# de predicții corecte: ', true_predict)
     print('# de predicții greșite: ', false_predict)
 
-    # Afisare statistici model curent
     model_manager = ModelManager()
     model_manager.display_current_model_metrics('ResNet50V2_DataAug')
 

@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import xml.etree.ElementTree as ET
 
-# Define paths
 dataset_path = "Date"
 images_url = "http://vision.stanford.edu/aditya86/ImageNetDogs/images.tar"
 annotations_url = "http://vision.stanford.edu/aditya86/ImageNetDogs/annotation.tar"
